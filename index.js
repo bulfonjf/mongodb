@@ -30,10 +30,9 @@ const MongoDBStore = connectMongo(session);
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
   collection: "sessions",
-  databaseName: "test",
 });
 
-store.on("error", (err) => console.log(err));
+store.on("Store error", (err) => console.log(err));
 
 app.use(
   session({
@@ -73,12 +72,13 @@ app.use(
   // an Apollo Server instance and optional configuration options
   expressMiddleware(server, {
     context: async ({ req, res }) => buildContext({ req, res }),
-    context: async ({ req }) => ({ req }),
   })
 );
 
 // Modified server startup
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+
+console.log(`before connectDB() `);
 
 await connectDB()
 
