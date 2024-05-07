@@ -30,6 +30,7 @@ const MongoDBStore = connectMongo(session);
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
   collection: "sessions",
+  databaseName: "test",
 });
 
 store.on("Store error", (err) => console.log(err));
