@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=developtment node backend/index.js",
     "dev": "NODE_ENV=developtment nodemon backend/index.js",
-    "build": "npm install"
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "type": "module",
   "keywords": [],
@@ -16,6 +16,7 @@
   "dependencies": {
     "@apollo/server": "^4.10.4",
     "@graphql-tools/merge": "^9.0.4",
+    "@types/prop-types": "^15.7.12",
     "bcryptjs": "^2.4.3",
     "connect-mongodb-session": "^5.0.0",
     "dotenv": "^16.4.5",
