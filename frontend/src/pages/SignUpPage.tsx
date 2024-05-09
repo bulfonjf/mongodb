@@ -18,7 +18,7 @@ const SignUpPage = () => {
 		refetchQueries: ["GetAuthenticatedUser"],
 	});
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		try {
 			await signup({
@@ -26,13 +26,13 @@ const SignUpPage = () => {
 					input: signUpData,
 				},
 			});
-		} catch (error) {
+		} catch (error: any) {
 			console.error("Error:", error);
 			toast.error(error.message);
 		}
 	};
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value, type } = e.target;
 
 		if (type === "radio") {

@@ -15,7 +15,7 @@ const LoginPage = () => {
 		refetchQueries: ["GetAuthenticatedUser"],
 	});
 
-	const handleChange = (e) => {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setLoginData((prevData) => ({
 			...prevData,
@@ -23,12 +23,12 @@ const LoginPage = () => {
 		}));
 	};
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!loginData.username || !loginData.password) return toast.error("Please fill in all fields");
 		try {
 			await login({ variables: { input: loginData } });
-		} catch (error) {
+		} catch (error: any) {
 			console.error("Error logging in:", error);
 			toast.error(error.message);
 		}
