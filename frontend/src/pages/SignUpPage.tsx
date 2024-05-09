@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 // import { useMutation } from "@apollo/client";
 // import { SIGN_UP } from "../graphql/mutations/user.mutation";
-import toast from "react-hot-toast";
+// import toast from "react-hot-toast";	
 
 const SignUpPage = () => {
 
@@ -27,10 +27,9 @@ const SignUpPage = () => {
 	const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		try {
-			toast.success("Sign Up Successful");
+			console.log("Sign Up");
 		} catch (error: any) {
 			console.error("Error handleOnClick:", error);
-			toast.error(error.message);
 		}
 	};
 
