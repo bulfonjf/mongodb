@@ -6,7 +6,13 @@ import { LOGIN } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 
 const LoginPage = () => {
-	const [loginData, setLoginData] = useState({
+
+	interface LoginData {
+		username: string;
+		password: string;
+	}
+
+	const [loginData, setLoginData] = useState<LoginData>({
 		username: "",
 		password: "",
 	});
