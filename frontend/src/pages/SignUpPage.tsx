@@ -34,6 +34,7 @@ const SignUpPage = () => {
 					input: signUpData,
 				},
 			});
+			toast.success("Account created successfully!");
 		} catch (error: any) {
 			console.error("Error:", error);
 			toast.error(error.message);
