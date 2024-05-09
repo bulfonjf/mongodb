@@ -1,13 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import RadioButton from "../components/RadioButton";
-import InputField from "../components/InputField";
 import { useMutation } from "@apollo/client";
 import { SIGN_UP } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
-	const [signUpData, setSignUpData] = useState({
+
+	interface SignUpFormState {
+		name: string;
+		username: string;
+		password: string;
+		gender: string;
+	}
+
+	const [signUpData, _] = useState<SignUpFormState>({
 		name: "",
 		username: "",
 		password: "",
@@ -18,7 +24,7 @@ const SignUpPage = () => {
 		refetchQueries: ["GetAuthenticatedUser"],
 	});
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleOnClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		try {
 			await signup({
@@ -27,26 +33,40 @@ const SignUpPage = () => {
 				},
 			});
 		} catch (error: any) {
-			console.error("Error:", error);
+			console.error("Error handleOnClick:", error);
 			toast.error(error.message);
 		}
 	};
 
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value, type } = e.target;
+	// const handleSubmit = async (e: React.FormEvent) => {
+	// 	e.preventDefault();
+	// 	try {
+	// 		await signup({
+	// 			variables: {
+	// 				input: signUpData,
+	// 			},
+	// 		});
+	// 	} catch (error: any) {
+	// 		console.error("Error:", error);
+	// 		toast.error(error.message);
+	// 	}
+	// };
 
-		if (type === "radio") {
-			setSignUpData((prevData) => ({
-				...prevData,
-				gender: value,
-			}));
-		} else {
-			setSignUpData((prevData) => ({
-				...prevData,
-				[name]: value,
-			}));
-		}
-	};
+	// const handleChange = (e) => {
+	// 	const { name, value, type } = e.target;
+
+	// 	if (type === "radio") {
+	// 		setSignUpData((prevData) => ({
+	// 			...prevData,
+	// 			gender: value,
+	// 		}));
+	// 	} else {
+	// 		setSignUpData((prevData) => ({
+	// 			...prevData,
+	// 			[name]: value,
+	// 		}));
+	// 	}
+	// };
 
 	return (
 		<div className='h-screen flex justify-center items-center'>
@@ -57,7 +77,16 @@ const SignUpPage = () => {
 						<h1 className='text-sm font-semibold mb-6 text-gray-500 text-center'>
 							Join to keep track of your expenses
 						</h1>
-						<form className='space-y-4' onSubmit={handleSubmit}>
+						<button
+									type='button'
+									className='w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black  focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed'
+									disabled={loading}
+									onClick={handleOnClick}
+								>
+									{loading ? "Loading..." : "Sign Up"}
+									
+								</button>
+						{/* <form className='space-y-4' onSubmit={handleSubmit}>
 							<InputField
 								label='Full Name'
 								id='name'
@@ -109,7 +138,7 @@ const SignUpPage = () => {
 									{loading ? "Loading..." : "Sign Up"}
 								</button>
 							</div>
-						</form>
+						</form> */}
 						<div className='mt-4 text-sm text-gray-600 text-center'>
 							<p>
 								Already have an account?{" "}
