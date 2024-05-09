@@ -16,7 +16,6 @@ function App() {
 
 	return (
 		<>
-    <p>{JSON.stringify(data)}</p>
 			<Routes>
 				<Route path='/' element={data.authUser ? <HomePage /> : <Navigate to='/login' />} />
 				<Route path='/login' element={!data.authUser ? <LoginPage /> : <Navigate to='/' />} />
