@@ -7,7 +7,15 @@ import { SIGN_UP } from "../graphql/mutations/user.mutation";
 import toast from "react-hot-toast";
 
 const SignUpPage = () => {
-	const [signUpData, setSignUpData] = useState({
+
+	interface SignUpFormState  {
+		name: string;
+		username: string;
+		password: string;
+		gender: string;
+	  }
+
+	const [signUpData, setSignUpData] = useState<SignUpFormState>({
 		name: "",
 		username: "",
 		password: "",
@@ -16,9 +24,12 @@ const SignUpPage = () => {
 
 	const [signup, { loading }] = useMutation(SIGN_UP, {
 		refetchQueries: ["GetAuthenticatedUser"],
+		onCompleted: (data) => {
+			console.log(data);
+		  },
 	});
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		try {
 			await signup({
