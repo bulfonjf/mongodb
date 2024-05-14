@@ -10,4 +10,5 @@ const todoTypeDef = `#graphql
     todos(userId:ID!): [Todo!]
   }
 `;
+
 export default todoTypeDef;
