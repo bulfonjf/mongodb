@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery } from "@apollo/client";
 import { LOGOUT } from "../graphql/mutations/user.mutation";
 import { GET_AUTHENTICATED_USER } from "../graphql/queries/user.query";
+import TodoView from "../components/todo/TodoView";
 
 
 const HomePage = () => {
@@ -42,6 +43,7 @@ const HomePage = () => {
 				</div>
 				
 			</div>
+			<TodoView />
 		</>
 	);
 };
