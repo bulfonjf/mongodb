@@ -12,12 +12,13 @@ function App() {
 
 	if (loading) return "Loading...";
 
-  if (error) return `Error! ${error.message}`;
+  	if (error) return `Error! ${error.message}`;
 
 	return (
 		<>
 			<Routes>
 				<Route path='/' element={data.authUser ? <HomePage /> : <Navigate to='/login' />} />
+				<Route path='/:todoId' element={data.authUser ? <HomePage /> : <Navigate to='/login' />} />
 				<Route path='/login' element={!data.authUser ? <LoginPage /> : <Navigate to='/' />} />
 				<Route path='/signup' element={!data.authUser ? <SignUpPage /> : <Navigate to='/' />} />
 				<Route path='*' element={<NotFoundPage />} />

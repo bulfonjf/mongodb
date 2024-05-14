@@ -3,11 +3,11 @@ const todoTypeDef = `#graphql
     _id: ID!
     text: String!
     userId: ID!
-    user: [User!]
   }
 
   type Query {
     todo(todoId:ID!): Todo
+    todos(userId:ID!): [Todo!]
   }
 `;
 

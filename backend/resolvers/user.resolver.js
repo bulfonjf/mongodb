@@ -84,7 +84,7 @@ const userResolver = {
         return user;
       } catch (err) {
         console.error("Error in user query:", err);
-        throw new Error(err.message || "Error getting user");
+        throw new Error(err.message || "Error getting user by id");
       }
     },
     users: async () => {
